@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="center" style="margin-top:100px;">
+    <h1 style="font-size:30px;">Are you sure you would like to delete this item from the auction?</h1>
+    <form method="POST">{% csrf_token %}<input type='submit' class='btn btn-danger btn-large' value="Delete Item" style="margin-top:20px;"></form>
+    <a href="{% url 'items:all-items' %}"><button class="btn btn-large btn-primary" style="margin-top:20px;">Cancel</button></a>
+</div>
+
+{% endblock content %}
+
+
+

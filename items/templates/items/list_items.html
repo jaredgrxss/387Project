@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="center" style="margin-top:20px;">Welcome to our Auction System!</h1>
+<h2 class="center" style="margin-top:30px; font-size:24px; margin-bottom:30px;">Below, you will find all currently available items up for auction!</h2>
+
+<table style="text-align:center; margin-top:20px; margin-left:auto; margin-right:auto; font-size:20px; border:1px solid black; border-collapse: collapse;">
+    <tr>
+        <th style="padding-left:20px; padding-right:20px; border-spacing:15px; border:1px solid black; border-collapse: collapse;">Preview</th>
+        <th style="padding-left:20px; padding-right:20px; border-spacing:15px; border:1px solid black; border-collapse: collapse;">Item Name</th>
+        <th style="padding-left:20px; padding-right:20px; border-spacing:15px; border:1px solid black; border-collapse: collapse;">Item Description</th>
+        <th style="padding-left:20px; padding-right:20px; border-spacing:15px; border:1px solid black; border-collapse: collapse;">Current Bid</th>
+    </tr>
+    <tr>
+    {% for curr_item in my_items %}
+        <td style="border-spacing:15px; border:1px solid black; border-collapse: collapse;"><img src="{{ curr_item.image.url }}" alt="" style="width:100px; height:80px;"></td>
+        <td style="padding-left:20px; padding-right:20px; border-spacing:15px; border:1px solid black; border-collapse: collapse;"><a href="{% url 'items:item-detail' pk=curr_item.pk %}">{{curr_item.name}}</a></td>
+        <td style="padding-left:20px; padding-right:20px; border-spacing:15px; border:1px solid black; border-collapse: collapse;">{{curr_item.description }}</td>
+        <td style="padding-left:20px; padding-right:20px; border-spacing:15px; border:1px solid black; border-collapse: collapse;">${{curr_item.highest_bid}}</td>
+
+    </tr>
+
+    {% empty %}
+    <h3 class="center" style="margin-top:25px; font-size: 25px;">Currently, there are no items up for auction! Check back later!</h3>
+    <hr>
+    {% endfor %}
+</table>
+
+<h2 class="center" style="margin-top:40px; margin-bottom:20px;">Want to join in? Click below to create an item to auction!</h2>
+<div class="center">
+    <a href="{% url 'items:create-item' %}"><input type='submit' class='btn btn-large btn-primary' value='Create An Item!'></a>
+</div>
+
+{% endblock content %}
+
+

@@ -1,0 +1,19 @@
+.about-format {
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.center {
+    text-align: center;
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.background-format {
+    background-color: #fef6e4;
+}

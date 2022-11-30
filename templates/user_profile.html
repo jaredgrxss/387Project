@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 style='text-align: center; margin-top:20px;'>Hello, {{request.user.username}} </h1>
+<h2 style='text-align: center; margin-top:20px;'> Here are all items you have created on our site! </h2>
+<hr>
+{% for auction_item in request.user.users_items.all %}
+    <h3 style='text-align: center;'> Name: {{ auction_item.name }}</h3>
+    <p style='text-align: center;'> Description: {{ auction_item.description }} </p>
+    <p style='text-align: center;'> With a highest bid of $ {{ auction_item.highest_bid }} </p>
+    <hr>
+{% empty%} 
+    <h3 class="center" style="margin-top:60px; font-size:24px;">Currently you have not created any items on our site! </h3>
+{% endfor %}
+
+{% endblock content %}
+
+

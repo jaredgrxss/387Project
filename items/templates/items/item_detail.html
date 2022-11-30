@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block  content %}
+
+<div class="center">
+    {% if not has_passed %}
+        <h1 style="margin-top:16px; margin-bottom:16px;">{{item.name}}</h1>
+        <img src="{{ item.image.url }}" alt="" style="width:400px; height:300px;">
+        <h2 style="font-size:24px; margin-top:12px;">Item Description: {{item.description}} </h2>
+        <h2 style="font-size:24px; margin-top:12px;">Current Bid: ${{item.highest_bid}}, placed by {{ item.highest_bid_user }}</h2>
+        <h2 style="font-size:24px; margin-top:12px;">This auction ends on {{item.sell_date}}</h2>
+        <h2 style="font-size:20px; margin-top:12px;">Previous Bids</h2>
+        {% for bids in item.item_bids.all %}
+            <h3 style="font-size:20px; margin-top:10px;">{{ bids.user }}, ${{bids.amount}}</h3>
+        {% endfor %}
+        <hr>
+        {% if user == item.user%}
+            <a href='{% url "items:delete-item" pk=item.pk %}'><input type='submit' class='btn btn-danger btn-large' value="Remove Listing" style="margin-bottom:24px; margin-top:10px;"></a>
+        {% endif %}
+        {% if user != item.user %}
+            <h2>Want a shot at winning this item?</h2>
+            <a href='{% url "items:create-bid" %}' class='btn btn-success btn-large' style="margin-bottom:24px; margin-top:10px;">Place Bid</a>
+        {% endif %}
+    {%else%}
+        <h1 style="margin-top:16px; margin-bottom:16px;">{{item.name}}</h1>
+        <img src="{{ item.image.url }}" alt="" style="width:400px; height:300px;">
+        <h2 style="font-size:24px; margin-top:12px;">Item Description: {{item.description}} </h2>
+        <h2 style="font-size:24px; margin-top:12px;">Sorry! This auction is over... Below is our winner!</h2>
+        <h4 style="font-size:24px; margin-top:12px;">{{item.highest_bid_user}}, with a bid amount of: ${{item.highest_bid }}</h4>
+    {% endif %}
+</div>
+
+{% endblock content %}
